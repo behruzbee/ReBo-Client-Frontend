@@ -10,7 +10,9 @@ interface ICreateHistory {
 export const createHistory = async (history: ICreateHistory) => {
   try {
     const result = await apiInstance.post('/history/public', history)
-    alert("Muvaffaqiyatli!")
+    if (result.data.message) {
+      return alert(result.data.message)
+    }
     return result.data
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
